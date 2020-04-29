@@ -28,6 +28,7 @@ A copy of cloudflared or another DoH
 ```
 wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb
 dpkg -i cloudflared-stable-linux-amd64.deb
+```
 
 Prevent modification to /etc/resolv.conf
 
