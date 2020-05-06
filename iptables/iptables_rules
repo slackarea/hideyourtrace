@@ -1,0 +1,22 @@
+iptables -t nat -N TRANSPARENT_PROXY
+
+iptables -t nat -A TRANSPARENT_PROXY -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 100.64.0.0/10 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 198.18.0.0/15 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A TRANSPARENT_PROXY -d 240.0.0.0/4 -j RETURN
+
+iptables -t nat -A TRANSPARENT_PROXY -p udp --dport 53 -j DNAT --to 127.0.0.1:53
+iptables -t nat -A TRANSPARENT_PROXY -p tcp --dport 53 -j DNAT --to 127.0.0.1:53
+
+iptables -t nat -A TRANSPARENT_PROXY -p tcp -j DNAT --to 127.0.0.1:12345
+
+iptables -t nat -A OUTPUT -p tcp -j TRANSPARENT_PROXY
+iptables -t nat -A PREROUTING -p tcp -j TRANSPARENT_PROXY
+
+sysctl -w net.ipv4.conf.all.route_localnet=1

@@ -1,0 +1,10 @@
+# This is the tor configuration file for tor instance 3.
+#
+# To start/reload/etc this instance, run "systemctl start tor@3" (or reload, or..).
+# This instance will run as user _tor-3; its data directory is /var/lib/tor-instances/3.
+#
+# Append to the list of socks interfaces configured via
+# /usr/share/tor/tor-service-defaults-torrc-instances
+# which is unix:/run/tor-instances/3/socks
+
+SocksPort 9053
